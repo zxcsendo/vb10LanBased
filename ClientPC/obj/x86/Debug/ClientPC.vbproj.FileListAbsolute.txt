@@ -1,0 +1,9 @@
+C:\Users\Admin\StudentInformationSystem\ClientPC\bin\Debug\ClientPC.exe
+C:\Users\Admin\StudentInformationSystem\ClientPC\bin\Debug\ClientPC.pdb
+C:\Users\Admin\StudentInformationSystem\ClientPC\bin\Debug\ClientPC.xml
+C:\Users\Admin\StudentInformationSystem\ClientPC\obj\x86\Debug\ClientPC.vbprojResolveAssemblyReference.cache
+C:\Users\Admin\StudentInformationSystem\ClientPC\obj\x86\Debug\ClientPC.Resources.resources
+C:\Users\Admin\StudentInformationSystem\ClientPC\obj\x86\Debug\ClientPC.vbproj.GenerateResource.Cache
+C:\Users\Admin\StudentInformationSystem\ClientPC\obj\x86\Debug\ClientPC.exe
+C:\Users\Admin\StudentInformationSystem\ClientPC\obj\x86\Debug\ClientPC.xml
+C:\Users\Admin\StudentInformationSystem\ClientPC\obj\x86\Debug\ClientPC.pdb
