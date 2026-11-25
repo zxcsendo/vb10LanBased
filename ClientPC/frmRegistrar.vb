@@ -400,4 +400,15 @@ Public Class frmRegistrar
         sb.Append(WebUi.Esc(If(String.IsNullOrWhiteSpace(value), "—", value)))
         sb.Append("</td></tr>")
     End Sub
+
+    Private Sub InitializeComponent()
+        Me.SuspendLayout()
+        '
+        'frmRegistrar
+        '
+        Me.ClientSize = New System.Drawing.Size(366, 329)
+        Me.Name = "frmRegistrar"
+        Me.ResumeLayout(False)
+
+    End Sub
 End Class

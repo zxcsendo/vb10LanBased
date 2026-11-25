@@ -1,0 +1,149 @@
+CAMPUS SIS - LAN / CROSSOVER SETUP FLOW
+Datamex College of Saint Adeline
+========================================
+
+GOAL:
+Two computers connected by crossover cable (or LAN).
+One PC is SERVER (SQL + Registrar).
+One PC is CLIENT (Student registration form).
+Both use the SAME database on the SERVER.
+
+
+DEVICES
+-------
+PC A = SERVER
+  - Has SQL Server (SQLEXPRESS)
+  - Runs Registrar app
+  - Hosts database: StudentInformationSystem
+
+PC B = CLIENT
+  - Runs Student registration form
+  - Connects to SERVER database over LAN
+
+
+STEP 1: CONNECT HARDWARE
+------------------------
+1. Plug crossover cable into Ethernet ports of both PCs.
+2. Optional: turn off Wi-Fi so only LAN is used.
+
+
+STEP 2: SET STATIC IP
+---------------------
+SERVER (PC A):
+  IP Address : 192.168.1.1
+  Subnet     : 255.255.255.0
+  Gateway    : (leave blank / same network)
+
+CLIENT (PC B):
+  IP Address : 192.168.1.2
+  Subnet     : 255.255.255.0
+  Gateway    : (leave blank / same network)
+
+TEST connectivity on CLIENT (CMD):
+  ping 192.168.1.1
+
+Must get replies. If not, fix IP/cable first.
+
+
+STEP 3: CONFIGURE SQL SERVER (SERVER PC ONLY)
+---------------------------------------------
+1. Open SQL Server Configuration Manager.
+2. Protocols for SQLEXPRESS -> Enable TCP/IP.
+3. TCP/IP Properties -> IP Addresses -> IPAll
+   - TCP Port = 1433
+4. Start SQL Server Browser service (Automatic).
+5. Restart SQL Server (SQLEXPRESS).
+6. Windows Firewall:
+   - Allow inbound TCP port 1433
+7. Open SSMS:
+   - Enable SQL Server and Windows Authentication mode
+8. Run the script:
+   Database\CreateDatabase.sql
+9. Create SQL login for LAN clients, example:
+   Username : sis_user
+   Password : Sis@12345
+   Map to database StudentInformationSystem
+   Roles    : db_datareader, db_datawriter
+
+
+STEP 4: EDIT Connection.vb
+--------------------------
+File locations:
+  ClientPC\Connection.vb
+  ServerPC\Connection.vb
+  (or the Connection.vb used by the app you run)
+
+SERVER PC Connection.vb:
+  SERVER_NAME  = ".\SQLEXPRESS"
+  USE_SQL_AUTH = True
+  SQL_USER     = "sis_user"
+  SQL_PASS     = "Sis@12345"
+
+CLIENT PC Connection.vb:
+  SERVER_NAME  = "192.168.1.1\SQLEXPRESS"
+  USE_SQL_AUTH = True
+  SQL_USER     = "sis_user"
+  SQL_PASS     = "Sis@12345"
+
+NOTES:
+- Change 192.168.1.1 if your server IP is different.
+- Rebuild/run the project after editing Connection.vb.
+
+
+STEP 5: RUN THE APPS
+--------------------
+SERVER PC:
+  - Run Registrar (ClientPC.exe / Registrar side)
+  - Login:
+      Username: registrar
+      Password: admin
+
+CLIENT PC:
+  - Run Student registration form
+  - Fill student details and Submit
+
+
+STEP 6: TEST DATA FLOW
+----------------------
+1. On CLIENT: register a student and submit.
+2. On SERVER: open Records.
+3. New student should appear (realtime / refresh not needed).
+4. Click View all to see full details popup.
+
+
+HOW IT WORKS (SIMPLE)
+---------------------
+Student Form (Client)
+        |
+        |  saves over LAN (TCP 1433)
+        v
+SQL Server Database on SERVER
+  (StudentInformationSystem.Students)
+        |
+        |  reads same data
+        v
+Registrar Desk (Server)
+
+
+CHECKLIST IF NOT WORKING
+------------------------
+[ ] Cable plugged properly (crossover/LAN)
+[ ] ping 192.168.1.1 works from client
+[ ] TCP/IP enabled, port 1433
+[ ] SQL Browser running
+[ ] Firewall allows 1433
+[ ] Database created (CreateDatabase.sql)
+[ ] SQL login works in SSMS from client machine
+[ ] CLIENT Connection.vb uses SERVER IP
+[ ] USE_SQL_AUTH = True on both for LAN
+[ ] Same database name: StudentInformationSystem
+
+
+QUICK SUMMARY
+-------------
+1. Connect cable
+2. Set static IPs
+3. Prepare SQL Server on SERVER
+4. Point CLIENT Connection.vb to SERVER IP
+5. Run Registrar on SERVER, Student form on CLIENT
+6. Submit on client -> appears on registrar

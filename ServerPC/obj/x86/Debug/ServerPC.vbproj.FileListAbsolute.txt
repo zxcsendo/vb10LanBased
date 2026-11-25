@@ -1,8 +1,8 @@
-C:\Users\Admin\StudentInformationSystem\ServerPC\obj\x86\Debug\ServerPC.Resources.resources
-C:\Users\Admin\StudentInformationSystem\ServerPC\obj\x86\Debug\ServerPC.vbproj.GenerateResource.Cache
 C:\Users\Admin\StudentInformationSystem\ServerPC\bin\Debug\ServerPC.exe
 C:\Users\Admin\StudentInformationSystem\ServerPC\bin\Debug\ServerPC.pdb
 C:\Users\Admin\StudentInformationSystem\ServerPC\bin\Debug\ServerPC.xml
+C:\Users\Admin\StudentInformationSystem\ServerPC\obj\x86\Debug\ServerPC.Resources.resources
+C:\Users\Admin\StudentInformationSystem\ServerPC\obj\x86\Debug\ServerPC.vbproj.GenerateResource.Cache
 C:\Users\Admin\StudentInformationSystem\ServerPC\obj\x86\Debug\ServerPC.exe
 C:\Users\Admin\StudentInformationSystem\ServerPC\obj\x86\Debug\ServerPC.xml
 C:\Users\Admin\StudentInformationSystem\ServerPC\obj\x86\Debug\ServerPC.pdb
